@@ -11,4 +11,8 @@ public class CategoryResDTO {
 
     private String description;
 
+    public CategoryResDTO(String name) {
+        this.name = name;
+        this.description = "not provided";
+    }
 }
