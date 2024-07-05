@@ -58,7 +58,9 @@ public class MeasurementServiceImpl implements MeasurementService {
         boolean exists = checkName(measurementReqDTO.getName(), id);
         if (exists) throw new EntityExistsException("This entity already exists!");
         Measurement measurement = findById(id);
-        measurement.setDescription(measurement.getDescription());
+        if (measurementReqDTO.getDescription() != null) {
+            measurement.setDescription(measurement.getDescription());
+        }
         measurement.setName(measurement.getName());
         measurementRepository.save(measurement);
         return ResponseEntity.ok(entityToDTO(measurement));
