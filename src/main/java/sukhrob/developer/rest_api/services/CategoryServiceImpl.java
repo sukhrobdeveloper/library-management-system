@@ -77,7 +77,9 @@ public class CategoryServiceImpl implements CategoryService {
         if (exists) throw new EntityExistsException("Category with this name already exists!");
         Category category = findById(id);
         category.setName(categoryReqDTO.getName());
-        category.setDescription(categoryReqDTO.getDescription());
+        if (categoryReqDTO.getDescription() != null) {
+            category.setDescription(categoryReqDTO.getDescription());
+        }
         categoryRepository.save(category);
         return ResponseEntity.ok(entityToDTO(category));
     }
