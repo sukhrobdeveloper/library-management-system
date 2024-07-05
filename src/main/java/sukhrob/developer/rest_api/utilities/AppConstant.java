@@ -11,4 +11,5 @@ public interface AppConstant {
     String DELETE = "/delete/";
     String ADD = "/add/";
 
+    String MEASUREMENT = BASE_PATH + "measurement/";
 }

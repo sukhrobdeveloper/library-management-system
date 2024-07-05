@@ -1,7 +1,6 @@
 package sukhrob.developer.rest_api.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,6 +8,8 @@ import lombok.Setter;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.SQLRestriction;
 import sukhrob.developer.rest_api.entities.template.AbsEntity;
+
+import java.util.Set;
 
 
 @Entity(name = "categories")
@@ -25,4 +26,13 @@ public class Category extends AbsEntity {
 
     private String description;
 
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "Category_Books_mapping", joinColumns = @JoinColumn(name = "category_id"),
+            inverseJoinColumns = @JoinColumn(name = "book_id"))
+    private Set<Book> books;
+
+    public Category(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
 }

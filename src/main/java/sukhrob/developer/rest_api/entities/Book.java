@@ -12,6 +12,7 @@ import sukhrob.developer.rest_api.utilities.BookType;
 import sukhrob.developer.rest_api.utilities.Language;
 
 import java.util.List;
+import java.util.Set;
 
 @Entity(name = "books")
 @NoArgsConstructor
@@ -22,7 +23,9 @@ import java.util.List;
 @SQLRestriction(value = "is_deleted=false")
 public class Book extends AbsEntity {
 
-    @ElementCollection
+    @ElementCollection(targetClass = String.class)
+    @CollectionTable(name = "authors", joinColumns = @JoinColumn(name = "id"))
+    @Column(name = "author", nullable = false)
     private List<String> authors;
 
     private int pageCount;
@@ -30,9 +33,11 @@ public class Book extends AbsEntity {
     private double price;
 
     @ManyToMany(fetch = FetchType.LAZY)
-    @CollectionTable(name = "categories", joinColumns = @JoinColumn(name = "book_id"))
-    @Column(name = "category", nullable = false)
-    private List<Category> categories;
+    @JoinTable(
+            name = "Category_Books_mapping", joinColumns = @JoinColumn(name = "book_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id")
+    )
+    private Set<Category> categories;
 
     private String description;
 
@@ -40,6 +45,8 @@ public class Book extends AbsEntity {
     private Language language;
 
     private double height;
+
+    private double weight;
 
     private double width;
 
