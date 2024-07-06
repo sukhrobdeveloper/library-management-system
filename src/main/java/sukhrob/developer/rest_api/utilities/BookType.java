@@ -6,4 +6,5 @@ public enum BookType {
 
     HARDCOVER,
 
+
 }

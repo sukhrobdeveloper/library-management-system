@@ -6,6 +6,9 @@ public enum Language {
     FR,
     RU,
     UZ,
+    SP,
+    IND,
+    DUTCH,
 
 
 }
