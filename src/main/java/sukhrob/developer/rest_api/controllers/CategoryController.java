@@ -2,8 +2,8 @@ package sukhrob.developer.rest_api.controllers;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import sukhrob.developer.rest_api.templates.CategoryReqDTO;
-import sukhrob.developer.rest_api.templates.CategoryResDTO;
+import sukhrob.developer.rest_api.payload.CategoryReqDTO;
+import sukhrob.developer.rest_api.payload.CategoryResDTO;
 import sukhrob.developer.rest_api.utilities.AppConstant;
 
 import java.util.List;

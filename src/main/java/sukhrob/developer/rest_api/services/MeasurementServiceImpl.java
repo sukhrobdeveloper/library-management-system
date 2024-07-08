@@ -9,8 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import sukhrob.developer.rest_api.entities.Measurement;
 import sukhrob.developer.rest_api.repo.MeasurementRepository;
-import sukhrob.developer.rest_api.templates.MeasurementReqDTO;
-import sukhrob.developer.rest_api.templates.MeasurementResDTO;
+import sukhrob.developer.rest_api.payload.MeasurementReqDTO;
+import sukhrob.developer.rest_api.payload.MeasurementResDTO;
 
 import java.util.List;
 import java.util.UUID;

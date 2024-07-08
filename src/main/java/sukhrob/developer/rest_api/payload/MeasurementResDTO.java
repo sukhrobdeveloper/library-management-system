@@ -1,18 +1,19 @@
-package sukhrob.developer.rest_api.templates;
+package sukhrob.developer.rest_api.payload;
 
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
-public class MeasurementReqDTO {
+public class MeasurementResDTO {
 
-    @NotNull(message = "name cannot be empty!")
     private String name;
 
     private String description;
 
+    public MeasurementResDTO(String name) {
+        this.name = name;
+    }
 }

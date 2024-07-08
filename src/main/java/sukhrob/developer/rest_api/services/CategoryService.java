@@ -2,8 +2,8 @@ package sukhrob.developer.rest_api.services;
 
 
 import org.springframework.http.ResponseEntity;
-import sukhrob.developer.rest_api.templates.CategoryReqDTO;
-import sukhrob.developer.rest_api.templates.CategoryResDTO;
+import sukhrob.developer.rest_api.payload.CategoryReqDTO;
+import sukhrob.developer.rest_api.payload.CategoryResDTO;
 
 import java.util.List;
 import java.util.UUID;

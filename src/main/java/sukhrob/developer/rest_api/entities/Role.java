@@ -1,19 +1,16 @@
 package sukhrob.developer.rest_api.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import jakarta.persistence.*;
+import lombok.*;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.SQLRestriction;
 import sukhrob.developer.rest_api.entities.template.AbsEntity;
+import sukhrob.developer.rest_api.payload.PermissionEnum;
 
-import java.util.Collection;
 
+import java.util.Set;
+
+@EqualsAndHashCode(callSuper = true)
 @Entity(name = "roles")
 @SQLDelete(sql = "update roles set is_deleted=true where id=?")
 @SQLRestriction(value = "is_deleted=false")
@@ -23,19 +20,14 @@ import java.util.Collection;
 @Getter
 public class Role extends AbsEntity {
 
+    @Column(unique = true)
     private String name;
 
-    @ManyToMany(mappedBy = "roles")
-    private Collection<User> users;
+    @Column(columnDefinition = "text")
+    private String description;
 
-    @ManyToMany
-    @JoinTable(
-            name = "roles_privileges",
-            joinColumns = @JoinColumn(
-                    name = "role_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(
-                    name = "privilege_id", referencedColumnName = "id")
-    )
-    private Collection<Privilege> privileges;
+    @Enumerated(value = EnumType.STRING)
+    @ElementCollection
+    private Set<PermissionEnum> permissionEnums;
 
 }

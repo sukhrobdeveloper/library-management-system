@@ -3,8 +3,8 @@ package sukhrob.developer.rest_api.controllers;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import sukhrob.developer.rest_api.services.MeasurementService;
-import sukhrob.developer.rest_api.templates.MeasurementReqDTO;
-import sukhrob.developer.rest_api.templates.MeasurementResDTO;
+import sukhrob.developer.rest_api.payload.MeasurementReqDTO;
+import sukhrob.developer.rest_api.payload.MeasurementResDTO;
 
 import java.util.List;
 import java.util.UUID;

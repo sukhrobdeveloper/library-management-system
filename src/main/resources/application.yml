@@ -1,0 +1,42 @@
+spring:
+  servlet:
+    multipart:
+      max-file-size: -1
+      max-request-size: -1
+  application:
+    name: library-management-system
+  datasource:
+    url: ${DATASOURCE_URL}
+    password: ${DATASOURCE_PASSWORD}
+    username: ${DATASOURCE_USERNAME}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    properties:
+      hibernate:
+        enable_lazy_load_no_trans: true
+        temp:
+          user_jbdc_metadata_defaults: false
+    show-sql: true
+    open-in-view: false
+  sql:
+    init:
+      mode: never
+
+
+
+server:
+  port: 8081
+
+
+dataLoaderMode: never
+accessTokenLifeTime: 86400000
+refreshTokenLifeTime: 172800000
+
+tokenSecretKey: thisIsSecretKey
+
+verificationCodeLimit: 10
+verificationCodeTime: 86400000
+
+verificationCodeExpiredTime: 180000

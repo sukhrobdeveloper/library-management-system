@@ -1,4 +1,4 @@
-package sukhrob.developer.rest_api.templates;
+package sukhrob.developer.rest_api.payload;
 
 import lombok.*;
 
