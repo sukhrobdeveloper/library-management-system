@@ -34,9 +34,9 @@ dataLoaderMode: never
 accessTokenLifeTime: 86400000
 refreshTokenLifeTime: 172800000
 
-tokenSecretKey: thisIsSecretKey
+tokenSecretKey: ${tokenSecretKey}
 
-verificationCodeLimit: 10
+verificationCodeLimit: 5
 verificationCodeTime: 86400000
 
 verificationCodeExpiredTime: 180000
