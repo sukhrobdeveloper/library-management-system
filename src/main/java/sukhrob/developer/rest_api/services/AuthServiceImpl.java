@@ -95,10 +95,10 @@ public class AuthServiceImpl implements AuthService {
         Long countSendingSmsCode = verificationCodeRepository.countAllByPhoneNumberAndCreatedAtAfter(phoneNumberDto.getPhoneNumber(), timestamp);
         String code = generateCode();
         if (countSendingSmsCode >= verificationCodeLimit)
-            throw new RestException(HttpStatus.TOO_MANY_REQUESTS, "Ko`p urinish qildingiz, birozdan keyin urinib ko`ring!");
+            throw new RestException(HttpStatus.TOO_MANY_REQUESTS, "Too many requests, pls try again later!");
         boolean sendVerificationCode = twilioService.sendVerificationCode(code, phoneNumberDto.getPhoneNumber());
         if (!sendVerificationCode)
-            throw new RestException(HttpStatus.INTERNAL_SERVER_ERROR, "Server xatoligi qayta urinib ko`ring!");
+            throw new RestException(HttpStatus.INTERNAL_SERVER_ERROR, "Server Error");
         VerificationCode verificationCode = new VerificationCode();
         verificationCode.setCode(code);
         verificationCode.setPhoneNumber(phoneNumberDto.getPhoneNumber());
@@ -123,7 +123,7 @@ public class AuthServiceImpl implements AuthService {
         Timestamp pastTime = new Timestamp(System.currentTimeMillis() - verificationCodeExpiryTime);
         VerificationCode verificationCode = verificationCodeRepository.getByCondition(
                         codeDto.getPhoneNumber(), codeDto.getCode(), pastTime)
-                .orElseThrow(() -> new RestException(HttpStatus.BAD_REQUEST, "Xato code Yubordiz"));
+                .orElseThrow(() -> new RestException(HttpStatus.BAD_REQUEST, "Invalid Code!"));
         Optional<User> optionalUser = userRepository.findByUsername(codeDto.getPhoneNumber());
         String accessToken = null;
         String refreshToken = null;
@@ -173,10 +173,10 @@ public class AuthServiceImpl implements AuthService {
                         jwtProvider.generateTokenFromUUID(userId, false)
                 ));
             } catch (Exception ex) {
-                throw new RestException(HttpStatus.UNAUTHORIZED, "Refresh token buzligan");
+                throw new RestException(HttpStatus.UNAUTHORIZED, "Refresh token expired!");
             }
         } catch (Exception e) {
-            throw new RestException(HttpStatus.UNAUTHORIZED, "Access token buzligan");
+            throw new RestException(HttpStatus.UNAUTHORIZED, "Access token expired!");
         }
     }
 
