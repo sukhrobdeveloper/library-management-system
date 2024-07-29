@@ -49,7 +49,6 @@ public class DataLoader implements CommandLineRunner {
                     "admin",
                     "adminov",
                     "sukhrob_dev",
-                    "s@gmail.com",
                     passwordEncoder.encode("sukhrob_1234"),
                     admin,
                     null,

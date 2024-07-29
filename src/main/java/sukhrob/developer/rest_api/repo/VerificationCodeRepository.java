@@ -26,4 +26,6 @@ public interface VerificationCodeRepository extends JpaRepository<VerificationCo
                                               @Param("code") String code,
                                               @Param("pastTime") Timestamp pastTime);
 
+    boolean existsByPhoneNumberAndConfirmedTrue(String phoneNumber);
+
 }

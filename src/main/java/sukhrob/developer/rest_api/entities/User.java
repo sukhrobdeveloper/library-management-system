@@ -32,9 +32,6 @@ public class User extends AbsEntity implements UserDetails {
     @Column(unique = true, nullable = false)
     private String username;
 
-    @Column(unique = true, nullable = false)
-    private String email;
-
     @Column(nullable = false)
     private String password;
 
@@ -49,11 +46,10 @@ public class User extends AbsEntity implements UserDetails {
     private boolean isAccountNonLocked = true;
     private boolean isCredentialsNonExpired = true;
 
-    public User(String firstName, String lastName, String username, String email, String password, Role role, Attachment avatar, boolean enabled) {
+    public User(String firstName, String lastName, String username, String password, Role role, Attachment avatar, boolean enabled) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
-        this.email = email;
         this.password = password;
         this.role = role;
         this.avatar = avatar;

@@ -2,10 +2,10 @@ package sukhrob.developer.rest_api.services;
 
 import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.persistence.EntityNotFoundException;
-import org.apache.tomcat.websocket.AuthenticationException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -22,11 +22,18 @@ import sukhrob.developer.rest_api.repo.RoleRepository;
 import sukhrob.developer.rest_api.repo.UserRepository;
 import sukhrob.developer.rest_api.repo.VerificationCodeRepository;
 import sukhrob.developer.rest_api.security.JWTProvider;
+import sukhrob.developer.rest_api.utilities.AppConstant;
 
-import java.net.Authenticator;
 import java.sql.Timestamp;
 import java.util.Optional;
 import java.util.UUID;
+
+/**
+ * @author Sukhrob Tokhirov
+ * @since 1.0
+ *
+ * <p>This class was completed on 2024-07-29 at 11:31 AM.</p>
+ */
 
 @Service
 public class AuthServiceImpl implements AuthService {
@@ -70,12 +77,21 @@ public class AuthServiceImpl implements AuthService {
             String refreshToken = jwtProvider.generateTokenFromUUID(user.getId(), false);
             String accessToken = jwtProvider.generateTokenFromUUID(user.getId(), true);
             return ResponseEntity.ok(new TokenDTO(accessToken, refreshToken));
-
     }
+
+    /**
+     *
+     * @param phoneNumberDto contains one parameter and that's phone number which user indicated during
+     *                       the registration process and I wrote a regex for phone number sequence. Mainstream of
+     *                       my website would be people from Uzbekistan and regex ensures that phone number is valid
+     *                       Uzbek Phone Number
+     * @return Notification about verification code that's sent to phone number, String
+     *
+     */
 
     @Override
     public ResponseEntity<?> checkPhoneNumber(PhoneNumberDto phoneNumberDto) {
-        Timestamp timestamp = new Timestamp(System.currentTimeMillis() - verificationCodeExpiryTime);
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis() - verificationCodeTime);
         Long countSendingSmsCode = verificationCodeRepository.countAllByPhoneNumberAndCreatedAtAfter(phoneNumberDto.getPhoneNumber(), timestamp);
         String code = generateCode();
         if (countSendingSmsCode >= verificationCodeLimit)
@@ -89,6 +105,11 @@ public class AuthServiceImpl implements AuthService {
         verificationCodeRepository.save(verificationCode);
         return ResponseEntity.ok("Verification code sent!");
     }
+
+    /**
+     *
+     * @return String - verification code
+     */
 
     private String generateCode() {
         String code = String.valueOf(Math.random() * 10000000);
@@ -120,7 +141,22 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public ResponseEntity<TokenDTO> signUp(SignUpDto signUpDto) {
-        return null;
+        boolean confirmed = verificationCodeRepository.existsByPhoneNumberAndConfirmedTrue(signUpDto.getPhoneNumber());
+        if (!confirmed)
+            throw new AuthenticationCredentialsNotFoundException("Verification code is false");
+
+        User user = new User(signUpDto.getFirstName(),
+                signUpDto.getLastName(),
+                signUpDto.getPhoneNumber(),
+                passwordEncoder.encode(signUpDto.getPassword()),
+                roleRepository.findByName(AppConstant.USER).orElseThrow(() -> new EntityNotFoundException("Role not found!")),
+                attachmentRepository.findById(signUpDto.getAttachmentId()).orElseThrow(() -> new EntityNotFoundException("Avatar not found!")),
+                true
+                );
+        userRepository.save(user);
+        String accessToken = jwtProvider.generateTokenFromUUID(user.getId(), true);
+        String refreshToken = jwtProvider.generateTokenFromUUID(user.getId(), false);
+        return ResponseEntity.ok(new TokenDTO(accessToken, refreshToken));
     }
 
     @Override
