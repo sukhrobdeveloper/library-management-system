@@ -1,9 +1,11 @@
 package sukhrob.developer.rest_api.exception;
 
+import lombok.Getter;
 import org.springframework.http.HttpStatus;
 
 public class RestException extends RuntimeException{
 
+    @Getter
     private HttpStatus status;
     private String message;
     private Object object;
@@ -18,7 +20,7 @@ public class RestException extends RuntimeException{
         this.object = object;
     }
 
-    public HttpStatus getStatus() {
+    private HttpStatus getStatus() {
         return status;
     }
 

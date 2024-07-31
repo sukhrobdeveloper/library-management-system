@@ -2,8 +2,11 @@ package sukhrob.developer.rest_api.services;
 
 import org.apache.tomcat.websocket.AuthenticationException;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import sukhrob.developer.rest_api.payload.*;
+
+import java.util.UUID;
 
 public interface AuthService extends UserDetailsService {
 
@@ -16,5 +19,7 @@ public interface AuthService extends UserDetailsService {
     ResponseEntity<TokenDTO> signUp(SignUpDto signUpDto);
 
     ResponseEntity<TokenDTO> refreshToken(TokenDTO tokenDto);
+
+    UserDetails loadById(UUID uuid);
 
 }

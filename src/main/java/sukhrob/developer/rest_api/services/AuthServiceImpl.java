@@ -181,6 +181,11 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
+    public UserDetails loadById(UUID uuid) {
+        return userRepository.findById(uuid).orElseThrow(() -> new RestException(HttpStatus.NOT_FOUND, "User not Found!"));
+    }
+
+    @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return userRepository.findByUsername(username).orElseThrow(() -> new EntityNotFoundException("Phone number is not found!"));
     }
