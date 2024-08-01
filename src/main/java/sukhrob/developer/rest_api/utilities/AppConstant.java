@@ -5,6 +5,7 @@ public interface AppConstant {
     String BASE_PATH = "/api/v1/";
 
     String AUTH = BASE_PATH + "auth/";
+    String ATTACHMENT = BASE_PATH + "attachment";
     String CATEGORY = BASE_PATH + "category";
     String VIEW_ALL = "/view/all";
     String VIEW_ONE = "/view/";
