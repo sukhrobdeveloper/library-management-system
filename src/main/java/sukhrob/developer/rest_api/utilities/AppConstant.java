@@ -22,4 +22,6 @@ public interface AppConstant {
 
     String ADMIN = "ADMIN";
 
+    String ROLE_CONTROLLER = BASE_PATH + "roles/";
+    String ATTACH_ROLE = ROLE_CONTROLLER + "attach-role/";
 }
