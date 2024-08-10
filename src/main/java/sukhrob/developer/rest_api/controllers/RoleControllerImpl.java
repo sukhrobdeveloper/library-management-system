@@ -22,26 +22,26 @@ public class RoleControllerImpl implements RoleController{
 
     @Override
     public ResponseEntity<RoleResDto> add(RoleReqDto roleReqDto) {
-        return null;
+        return roleService.add(roleReqDto);
     }
 
     @Override
     public ResponseEntity<?> attachRole(RoleAttachDto roleAttachDto) {
-        return null;
+        return roleService.attachRole(roleAttachDto);
     }
 
     @Override
     public ResponseEntity<?> getAll() {
-        return null;
+        return roleService.getAll();
     }
 
     @Override
     public ResponseEntity<RoleResDto> getPermissionById(UUID id) {
-        return null;
+        return roleService.getPermissionById(id);
     }
 
     @Override
     public ResponseEntity<Set<PermissionEnum>> getAllPermission() {
-        return null;
+        return roleService.getAllPermission();
     }
 }
