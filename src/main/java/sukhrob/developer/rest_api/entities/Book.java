@@ -23,6 +23,9 @@ import java.util.Set;
 @SQLRestriction(value = "is_deleted=false")
 public class Book extends AbsEntity {
 
+    @Column(nullable = false)
+    private String title;
+
     @ElementCollection(targetClass = String.class)
     @CollectionTable(name = "authors", joinColumns = @JoinColumn(name = "id"))
     @Column(name = "author", nullable = false)
@@ -55,5 +58,7 @@ public class Book extends AbsEntity {
 
     @Enumerated(value = EnumType.STRING)
     private BookType type;
+
+    private boolean isAvailable;
 
 }
