@@ -2,10 +2,12 @@ package sukhrob.developer.rest_api.services;
 
 
 import org.springframework.http.ResponseEntity;
+import sukhrob.developer.rest_api.entities.Category;
 import sukhrob.developer.rest_api.payload.CategoryReqDTO;
 import sukhrob.developer.rest_api.payload.CategoryResDTO;
 
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 public interface CategoryService {
@@ -23,5 +25,7 @@ public interface CategoryService {
     ResponseEntity<CategoryResDTO> update(CategoryReqDTO categoryReqDTO, UUID id);
 
     ResponseEntity<?> delete(UUID id);
+
+    Set<Category> findAllById(Set<UUID> id);
 
 }

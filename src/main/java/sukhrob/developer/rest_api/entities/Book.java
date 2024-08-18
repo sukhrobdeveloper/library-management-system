@@ -29,7 +29,7 @@ public class Book extends AbsEntity {
     @ElementCollection(targetClass = String.class)
     @CollectionTable(name = "authors", joinColumns = @JoinColumn(name = "id"))
     @Column(name = "author", nullable = false)
-    private List<String> authors;
+    private Set<String> authors;
 
     private int pageCount;
 
@@ -44,8 +44,11 @@ public class Book extends AbsEntity {
 
     private String description;
 
+    @ElementCollection(targetClass = BookType.class)
+    @CollectionTable(name = "book_languages", joinColumns = @JoinColumn(name = "book_id"))
     @Enumerated(value = EnumType.STRING)
-    private Language language;
+    @Column(name = "language")
+    private Set<Language> language;
 
     private double height;
 
@@ -56,9 +59,14 @@ public class Book extends AbsEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     private Measurement measurement;
 
+    @ElementCollection(targetClass = BookType.class)
+    @CollectionTable(name = "book_types", joinColumns = @JoinColumn(name = "book_id"))
     @Enumerated(value = EnumType.STRING)
-    private BookType type;
+    @Column(name = "type")
+    private Set<BookType> type;
 
     private boolean isAvailable;
+
+    private double avgRating;
 
 }

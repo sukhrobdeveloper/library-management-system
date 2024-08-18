@@ -13,9 +13,8 @@ import sukhrob.developer.rest_api.repo.CategoryRepository;
 import sukhrob.developer.rest_api.payload.CategoryReqDTO;
 import sukhrob.developer.rest_api.payload.CategoryResDTO;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class CategoryServiceImpl implements CategoryService {
@@ -95,6 +94,10 @@ public class CategoryServiceImpl implements CategoryService {
         return categoryRepository.findById(id).orElseThrow(
                 () -> new EntityNotFoundException("Entity not found for id" + id)
         );
+    }
+
+    public Set<Category> findAllById(Set<UUID> uuids) {
+        return new HashSet<>(categoryRepository.findAllById(uuids));
     }
 
     private boolean checkName(String name) {
