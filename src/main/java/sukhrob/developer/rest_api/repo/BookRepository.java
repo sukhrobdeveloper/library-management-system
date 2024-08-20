@@ -13,4 +13,8 @@ public interface BookRepository extends JpaRepository<Book, UUID> {
 
     List<Book> findAllByCategories(Set<Category> categories);
 
+    boolean existsByTitleAndAuthorsAndCategories(String title, Set<String> authors, Set<Category> categories);
+
+    boolean existsByTitleAndAuthorsAndCategoriesAndIdNot(String title, Set<String> authors, Set<Category> categories, UUID id);
+
 }
