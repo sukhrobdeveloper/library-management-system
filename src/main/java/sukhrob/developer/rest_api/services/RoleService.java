@@ -11,22 +11,22 @@ import java.util.UUID;
 
 public interface RoleService {
 
-    public ResponseEntity<RoleResDto> add(RoleReqDto roleReqDto);
+    ResponseEntity<RoleResDto> add(RoleReqDto roleReqDto);
 
 
 
-    public ResponseEntity<?> attachRole(RoleAttachDto roleAttachDto);
+    ResponseEntity<?> attachRole(RoleAttachDto roleAttachDto);
 
 
 
-    public ResponseEntity<?> getAll();
+    ResponseEntity<?> getAll();
 
 
 
-    public ResponseEntity<RoleResDto> getPermissionById(UUID id);
+    ResponseEntity<RoleResDto> getPermissionById(UUID id);
 
 
 
-    public ResponseEntity<Set<PermissionEnum>> getAllPermission();
+    ResponseEntity<Set<PermissionEnum>> getAllPermission();
 
 }

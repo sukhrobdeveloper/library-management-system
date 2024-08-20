@@ -14,7 +14,6 @@ import sukhrob.developer.rest_api.payload.CategoryReqDTO;
 import sukhrob.developer.rest_api.payload.CategoryResDTO;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Service
 public class CategoryServiceImpl implements CategoryService {

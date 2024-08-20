@@ -1,6 +1,5 @@
 package sukhrob.developer.rest_api.controllers;
 
-import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;

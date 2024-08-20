@@ -9,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import sukhrob.developer.rest_api.entities.Book;
 import sukhrob.developer.rest_api.entities.Category;
-import sukhrob.developer.rest_api.entities.Measurement;
 import sukhrob.developer.rest_api.exception.RestException;
 import sukhrob.developer.rest_api.payload.BookCategoryResDTO;
 import sukhrob.developer.rest_api.payload.BookReqDTO;
