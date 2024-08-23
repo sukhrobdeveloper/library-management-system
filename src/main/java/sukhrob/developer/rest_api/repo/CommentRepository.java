@@ -12,5 +12,10 @@ public interface CommentRepository extends JpaRepository<Comment, UUID> {
     @Query("select avg(grade) from comments where id = :id")
     double getGradeByBookId(@Param("id") UUID id);
 
+    @Query(value = """
+            select * from comments where book = (select * from books where id = :bookId) and user = (select * from users where id = :userId)
+            """, nativeQuery = true)
+    Comment findByBookIdAndUserId(@Param("bookId") UUID bookId, @Param("userId") UUID userId);
+
 }
 

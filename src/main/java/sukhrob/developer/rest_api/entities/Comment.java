@@ -29,10 +29,10 @@ import java.util.UUID;
 public class Comment extends AbsEntity implements Serializable {
 
     @Column(nullable = false)
-    private String title;
-
-    @Column(nullable = false)
     private String content;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private User user;
 
     @Column(nullable = false)
     private Integer grade;
@@ -47,11 +47,5 @@ public class Comment extends AbsEntity implements Serializable {
     private Date publishedDate;
 
     private boolean isRecommended;
-
-    private Long likeCount;
-
-    private Long dislikeCount;
-
-    private UUID parentCommentId;
 
 }

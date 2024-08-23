@@ -24,9 +24,6 @@ public interface CommentController {
     ResponseEntity<List<CommentResDTO>> viewAll(@RequestParam(defaultValue = "0") int page,
                                                 @RequestParam(defaultValue = "10") int size);
 
-    @GetMapping(AppConstant.VIEW_ALL_BY_ID + "{parentId}")
-    ResponseEntity<List<CommentResDTO>> viewAllByParentId(@PathVariable UUID parentId);
-
     @DeleteMapping(AppConstant.DELETE + "{id}")
     ResponseEntity<?> delete(@PathVariable UUID id);
 
