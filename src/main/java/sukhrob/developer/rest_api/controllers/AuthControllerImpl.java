@@ -2,6 +2,7 @@ package sukhrob.developer.rest_api.controllers;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
+import sukhrob.developer.rest_api.entities.User;
 import sukhrob.developer.rest_api.payload.*;
 import sukhrob.developer.rest_api.services.AuthService;
 
@@ -37,5 +38,10 @@ public class AuthControllerImpl implements AuthController {
     @Override
     public ResponseEntity<TokenDTO> refreshToken(TokenDTO tokenDto) {
         return authService.refreshToken(tokenDto);
+    }
+
+    @Override
+    public ResponseEntity<User> profile(User user) {
+        return ResponseEntity.ok(user);
     }
 }

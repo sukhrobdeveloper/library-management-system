@@ -6,7 +6,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Service;
+import sukhrob.developer.rest_api.config.SecurityAuditingAware;
 import sukhrob.developer.rest_api.entities.Comment;
 import sukhrob.developer.rest_api.exception.RestException;
 import sukhrob.developer.rest_api.payload.CommentReqDTO;
@@ -24,12 +26,14 @@ public class CommentServiceImpl implements CommentService {
     private final CommentRepository commentRepository;
     private final UserRepository userRepository;
     private final BookRepository bookRepository;
+    private final SecurityAuditingAware auditingAware;
 
 
-    public CommentServiceImpl(CommentRepository commentRepository, UserRepository userRepository, BookRepository bookRepository) {
+    public CommentServiceImpl(CommentRepository commentRepository, UserRepository userRepository, BookRepository bookRepository, SecurityAuditingAware auditingAware) {
         this.commentRepository = commentRepository;
         this.userRepository = userRepository;
         this.bookRepository = bookRepository;
+        this.auditingAware = auditingAware;
     }
 
     @Override
@@ -80,8 +84,14 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public ResponseEntity<?> delete(UUID id) {
+        UUID userId = auditingAware.getCurrentAuditor().orElseThrow(() -> new RestException(HttpStatus.FORBIDDEN, "Method not allowed!"));
+        if (existsByCommentIdAndUserId(id, userId)) throw new EntityNotFoundException("Entity not found!");
         commentRepository.delete(findById(id));
         return ResponseEntity.ok("Success!");
+    }
+
+    private boolean existsByCommentIdAndUserId(UUID id, UUID userId) {
+        return commentRepository.existsByIdAndUserId(id, userId);
     }
 
     @Override
