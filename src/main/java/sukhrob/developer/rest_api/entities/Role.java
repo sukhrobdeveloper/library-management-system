@@ -5,7 +5,7 @@ import lombok.*;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.SQLRestriction;
 import sukhrob.developer.rest_api.entities.template.AbsEntity;
-import sukhrob.developer.rest_api.payload.PermissionEnum;
+import sukhrob.developer.rest_api.payload.enums.PermissionEnum;
 
 
 import java.util.Set;

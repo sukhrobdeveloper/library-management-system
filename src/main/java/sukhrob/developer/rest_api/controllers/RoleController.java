@@ -4,7 +4,7 @@ import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import sukhrob.developer.rest_api.payload.PermissionEnum;
+import sukhrob.developer.rest_api.payload.enums.PermissionEnum;
 import sukhrob.developer.rest_api.payload.RoleAttachDto;
 import sukhrob.developer.rest_api.payload.RoleReqDto;
 import sukhrob.developer.rest_api.payload.RoleResDto;

@@ -6,7 +6,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import sukhrob.developer.rest_api.entities.Role;
 import sukhrob.developer.rest_api.entities.User;
-import sukhrob.developer.rest_api.payload.PermissionEnum;
+import sukhrob.developer.rest_api.payload.enums.PermissionEnum;
 import sukhrob.developer.rest_api.repo.RoleRepository;
 import sukhrob.developer.rest_api.repo.UserRepository;
 import sukhrob.developer.rest_api.utilities.AppConstant;

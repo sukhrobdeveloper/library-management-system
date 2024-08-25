@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import sukhrob.developer.rest_api.entities.Role;
 import sukhrob.developer.rest_api.entities.User;
 import sukhrob.developer.rest_api.exception.RestException;
-import sukhrob.developer.rest_api.payload.PermissionEnum;
+import sukhrob.developer.rest_api.payload.enums.PermissionEnum;
 import sukhrob.developer.rest_api.payload.RoleAttachDto;
 import sukhrob.developer.rest_api.payload.RoleReqDto;
 import sukhrob.developer.rest_api.payload.RoleResDto;

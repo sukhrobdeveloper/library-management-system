@@ -1,6 +1,7 @@
 package sukhrob.developer.rest_api.controllers;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RestController;
 import sukhrob.developer.rest_api.services.MeasurementService;
 import sukhrob.developer.rest_api.payload.MeasurementReqDTO;
@@ -28,16 +29,19 @@ public class MeasurementControllerImpl implements MeasurementController {
         return measurementService.viewAll(page, size);
     }
 
+    @PreAuthorize(value = "hasAuthority('ADD_MEASUREMENT')")
     @Override
     public ResponseEntity<MeasurementResDTO> add(MeasurementReqDTO measurementReqDTO) {
         return measurementService.add(measurementReqDTO);
     }
 
+    @PreAuthorize(value = "hasAuthority('EDIT_MEASUREMENT')")
     @Override
     public ResponseEntity<MeasurementResDTO> update(MeasurementReqDTO measurementReqDTO, UUID id) {
         return measurementService.update(id, measurementReqDTO);
     }
 
+    @PreAuthorize(value = "hasAuthority('DELETE_MEASUREMENT')")
     @Override
     public ResponseEntity<?> delete(UUID id) {
         return measurementService.delete(id);

@@ -1,6 +1,7 @@
 package sukhrob.developer.rest_api.controllers;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RestController;
 import sukhrob.developer.rest_api.payload.BookCategoryResDTO;
 import sukhrob.developer.rest_api.payload.BookReqDTO;
@@ -34,16 +35,19 @@ public class BookControllerImpl implements BookController {
         return bookService.getBooksByCategory(bookCategoryResDTO);
     }
 
+    @PreAuthorize(value = "hasAuthority('ADD_BOOKS')")
     @Override
     public ResponseEntity<BookResDTO> add(BookReqDTO bookReqDTO) {
         return bookService.add(bookReqDTO);
     }
 
+    @PreAuthorize(value = "hasAuthority('EDIT_BOOKS')")
     @Override
     public ResponseEntity<BookResDTO> update(BookReqDTO bookReqDTO, UUID id) {
         return bookService.update(bookReqDTO, id);
     }
 
+    @PreAuthorize(value = "hasAuthority('DELETE_BOOKS')")
     @Override
     public ResponseEntity<?> delete(UUID id) {
         return bookService.delete(id);

@@ -1,7 +1,7 @@
 package sukhrob.developer.rest_api.services;
 
 import org.springframework.http.ResponseEntity;
-import sukhrob.developer.rest_api.payload.PermissionEnum;
+import sukhrob.developer.rest_api.payload.enums.PermissionEnum;
 import sukhrob.developer.rest_api.payload.RoleAttachDto;
 import sukhrob.developer.rest_api.payload.RoleReqDto;
 import sukhrob.developer.rest_api.payload.RoleResDto;

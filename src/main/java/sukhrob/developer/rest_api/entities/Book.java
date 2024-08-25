@@ -8,10 +8,9 @@ import lombok.Setter;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.SQLRestriction;
 import sukhrob.developer.rest_api.entities.template.AbsEntity;
-import sukhrob.developer.rest_api.utilities.BookType;
-import sukhrob.developer.rest_api.utilities.Language;
+import sukhrob.developer.rest_api.payload.enums.BookType;
+import sukhrob.developer.rest_api.payload.enums.Language;
 
-import java.util.List;
 import java.util.Set;
 
 @Entity(name = "books")

@@ -5,8 +5,8 @@ import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import sukhrob.developer.rest_api.utilities.BookType;
-import sukhrob.developer.rest_api.utilities.Language;
+import sukhrob.developer.rest_api.payload.enums.BookType;
+import sukhrob.developer.rest_api.payload.enums.Language;
 
 import java.util.Set;
 import java.util.UUID;

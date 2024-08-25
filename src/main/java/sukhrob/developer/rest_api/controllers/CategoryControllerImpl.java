@@ -1,6 +1,7 @@
 package sukhrob.developer.rest_api.controllers;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RestController;
 import sukhrob.developer.rest_api.services.CategoryService;
 import sukhrob.developer.rest_api.payload.CategoryReqDTO;
@@ -34,16 +35,19 @@ public class CategoryControllerImpl implements CategoryController {
         return categoryService.viewOne(id);
     }
 
+    @PreAuthorize(value = "hasAuthority('ADD_CATEGORY')")
     @Override
     public ResponseEntity<CategoryResDTO> add(CategoryReqDTO categoryReqDTO) {
         return categoryService.add(categoryReqDTO);
     }
 
+    @PreAuthorize(value = "hasAuthority('EDIT_CATEGORY')")
     @Override
     public ResponseEntity<CategoryResDTO> update(CategoryReqDTO categoryReqDTO, UUID id) {
         return categoryService.update(categoryReqDTO, id);
     }
 
+    @PreAuthorize(value = "hasAuthority('DELETE_CATEGORY')")
     @Override
     public ResponseEntity<?> delete(UUID id) {
         return categoryService.delete(id);
